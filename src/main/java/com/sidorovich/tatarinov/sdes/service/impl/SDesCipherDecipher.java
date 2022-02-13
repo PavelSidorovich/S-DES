@@ -9,14 +9,10 @@ import com.sidorovich.tatarinov.sdes.util.impl.BitSetCyclicShift;
 import com.sidorovich.tatarinov.sdes.util.impl.BitSetUtilImpl;
 import com.sidorovich.tatarinov.sdes.util.impl.RoundUtilImpl;
 
-import java.util.BitSet;
-
 public class SDesCipherDecipher implements Cipher, Decipher {
 
     private static final int[] RULE_IP = { 2, 6, 3, 1, 4, 8, 5, 7 };
     private static final int[] RULE_IP_1 = { 4, 1, 3, 5, 7, 2, 8, 6 };
-
-    private static final int BIT_COUNT = 8;
 
     private final BitSetUtil bitSetUtil;
     private final RoundUtil roundUtil;
@@ -31,7 +27,7 @@ public class SDesCipherDecipher implements Cipher, Decipher {
         BitArray output = bitSetUtil.replace(bitSet, RULE_IP);
 
         output = roundUtil.round(output, key1);
-        output = bitSetUtil.changeParts(output, BIT_COUNT);
+        output = bitSetUtil.changeParts(output);
         output = roundUtil.round(output, key2);
         output = bitSetUtil.replace(output, RULE_IP_1);
 

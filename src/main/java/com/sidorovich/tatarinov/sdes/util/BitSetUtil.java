@@ -11,6 +11,6 @@ public interface BitSetUtil {
 
     Pair<BitArray, BitArray> split(BitArray input);
 
-    BitArray changeParts(BitArray bitSet, int totalSize);
+    BitArray changeParts(BitArray bitSet);
 
 }

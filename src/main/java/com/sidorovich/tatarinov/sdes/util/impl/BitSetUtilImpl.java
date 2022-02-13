@@ -36,7 +36,7 @@ public class BitSetUtilImpl implements BitSetUtil {
     }
 
     @Override
-    public BitArray changeParts(BitArray bitArray, int totalSize) {
+    public BitArray changeParts(BitArray bitArray) {
         Pair<BitArray, BitArray> bitArrayPair = split(bitArray);
 
         return bitArrayPair.getObject2().cat(bitArrayPair.getObject1());
