@@ -1,9 +1,9 @@
 package com.sidorovich.tatarinov.sdes.service;
 
-import java.util.BitSet;
+import com.sidorovich.tatarinov.sdes.model.BitArray;
 
 public interface Decipher {
 
-    BitSet decipher(BitSet bitSet, BitSet key1, BitSet key2);
+    BitArray decipher(BitArray bitSet, BitArray key1, BitArray key2);
 
 }

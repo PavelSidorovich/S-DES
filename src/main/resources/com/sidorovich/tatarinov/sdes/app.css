@@ -6,7 +6,7 @@
   -fx-prompt-text-fill: #8c8c8c;
 }
 
-.text-field:focused{
+.text-field:focused {
   -fx-border-color: #4b68d2;
 }
 
@@ -25,10 +25,10 @@
   -fx-text-fill: white;
 }
 
-.button:hover{
+.button:hover {
   -fx-background-color: #3053d2;
 }
 
-.progress-indicator{
+.progress-indicator {
   -fx-progress-color: #4b68d2;
 }

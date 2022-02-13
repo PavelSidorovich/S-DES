@@ -1,9 +1,11 @@
 package com.sidorovich.tatarinov.sdes.service;
 
+import com.sidorovich.tatarinov.sdes.model.BitArray;
+
 import java.util.BitSet;
 
 public interface Cipher {
 
-    BitSet cipher(BitSet bitSet, BitSet key1, BitSet key2);
+    BitArray cipher(BitArray bitSet, BitArray key1, BitArray key2);
 
 }

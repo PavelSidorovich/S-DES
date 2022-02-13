@@ -1,11 +1,10 @@
 package com.sidorovich.tatarinov.sdes.util;
 
 import com.sidorovich.tatarinov.sdes.exception.InvalidInputKeyException;
-
-import java.util.BitSet;
+import com.sidorovich.tatarinov.sdes.model.BitArray;
 
 public interface KeyExtractor {
 
-    BitSet extract(String inputKey) throws InvalidInputKeyException;
+    BitArray extract(String inputKey) throws InvalidInputKeyException;
 
 }

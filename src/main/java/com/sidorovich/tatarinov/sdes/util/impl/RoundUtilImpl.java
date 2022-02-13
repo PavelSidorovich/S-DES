@@ -1,11 +1,10 @@
 package com.sidorovich.tatarinov.sdes.util.impl;
 
+import com.sidorovich.tatarinov.sdes.model.BitArray;
 import com.sidorovich.tatarinov.sdes.model.Pair;
 import com.sidorovich.tatarinov.sdes.util.BitSetUtil;
 import com.sidorovich.tatarinov.sdes.util.KeyExtractor;
 import com.sidorovich.tatarinov.sdes.util.RoundUtil;
-
-import java.util.BitSet;
 
 public class RoundUtilImpl implements RoundUtil {
 
@@ -16,7 +15,6 @@ public class RoundUtilImpl implements RoundUtil {
     private static final int[][] S_BOX_2 =
             { { 0, 2, 3, 2 }, { 1, 0, 0, 1 }, { 2, 1, 1, 0 }, { 3, 3, 0, 3 } };
 
-    private static final int BITSET_SIZE = 8;
     private static final int BIT_COUNT = 2;
 
     private static final String ONE = "1";
@@ -27,35 +25,35 @@ public class RoundUtilImpl implements RoundUtil {
 
     public RoundUtilImpl(BitSetUtil bitSetUtil) {
         this.bitSetUtil = bitSetUtil;
-        this.keyExtractor = new BitSetKeyExtractor(new BitSetValidator(BIT_COUNT));
+        this.keyExtractor = new BitSetKeyExtractor(new BitArrayValidator(BIT_COUNT));
     }
 
     @Override
-    public BitSet round(BitSet source, BitSet key) {
-        Pair<BitSet, BitSet> bitSetPair = bitSetUtil.split(source, BITSET_SIZE);
-        BitSet rightPart = bitSetUtil.replace(bitSetPair.getObject2(), RULE_EP);
-        BitSet xorBitSet = (BitSet) rightPart.clone();
+    public BitArray round(BitArray source, BitArray key) {
+        Pair<BitArray, BitArray> bitSetPair = bitSetUtil.split(source);
+        BitArray rightPart = bitSetUtil.replace(bitSetPair.getObject2(), RULE_EP);
+        BitArray xorBitSet = rightPart.get(0, rightPart.size());
 
         xorBitSet.xor(key);
-        BitSet result = processPartsUsingBoxes(xorBitSet);
+        BitArray result = processPartsUsingBoxes(xorBitSet);
         result = bitSetUtil.replace(result, RULE_P_4);
         result.xor(bitSetPair.getObject1());
 
-        return bitSetUtil.concat(new Pair<>(result, bitSetPair.getObject2()), BITSET_SIZE);
+        return result.cat(bitSetPair.getObject2());
     }
 
-    private BitSet processPartsUsingBoxes(BitSet bitSet) {
-        Pair<BitSet, BitSet> partsToProcess = bitSetUtil.split(bitSet, BITSET_SIZE);
+    private BitArray processPartsUsingBoxes(BitArray bitSet) {
+        Pair<BitArray, BitArray> partsToProcess = bitSetUtil.split(bitSet);
 
-        BitSet part1 = processUsingBox(partsToProcess.getObject1(), S_BOX_1);
-        BitSet part2 = processUsingBox(partsToProcess.getObject2(), S_BOX_2);
+        BitArray part1 = processUsingBox(partsToProcess.getObject1(), S_BOX_1);
+        BitArray part2 = processUsingBox(partsToProcess.getObject2(), S_BOX_2);
 
-        return bitSetUtil.concat(new Pair<>(part1, part2), 4);
+        return part1.cat(part2);
     }
 
-    private BitSet processUsingBox(BitSet bitSet, int[][] box) {
-        final BitSet rowBitset = new BitSet(BIT_COUNT);
-        final BitSet colBitset = new BitSet(BIT_COUNT);
+    private BitArray processUsingBox(BitArray bitSet, int[][] box) {
+        final BitArray rowBitset = new BitArray(BIT_COUNT);
+        final BitArray colBitset = new BitArray(BIT_COUNT);
 
         rowBitset.set(0, bitSet.get(0));
         rowBitset.set(1, bitSet.get(3));
@@ -69,7 +67,7 @@ public class RoundUtilImpl implements RoundUtil {
         return keyExtractor.extract(binaryString);
     }
 
-    private Pair<Integer, Integer> getColAndRowIndexes(BitSet colBitSet, BitSet rowBitSet) {
+    private Pair<Integer, Integer> getColAndRowIndexes(BitArray colBitSet, BitArray rowBitSet) {
         final int radix = 2;
         StringBuilder colIndexString = new StringBuilder();
         StringBuilder rowIndexString = new StringBuilder();

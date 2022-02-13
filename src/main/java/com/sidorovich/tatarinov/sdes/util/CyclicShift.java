@@ -1,9 +1,9 @@
 package com.sidorovich.tatarinov.sdes.util;
 
-import java.util.BitSet;
+import com.sidorovich.tatarinov.sdes.model.BitArray;
 
 public interface CyclicShift {
 
-    BitSet shift(BitSet inputKey, int size, int position);
+    BitArray shift(BitArray inputKey, int position);
 
 }

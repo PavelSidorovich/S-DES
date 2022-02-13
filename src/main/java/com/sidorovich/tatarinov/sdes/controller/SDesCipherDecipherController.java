@@ -5,7 +5,7 @@ import com.sidorovich.tatarinov.sdes.service.FileCipherDecipher;
 import com.sidorovich.tatarinov.sdes.service.impl.FileCipherDecipherImpl;
 import com.sidorovich.tatarinov.sdes.service.impl.SDesCipherDecipher;
 import com.sidorovich.tatarinov.sdes.util.Validator;
-import com.sidorovich.tatarinov.sdes.util.impl.BitSetValidator;
+import com.sidorovich.tatarinov.sdes.util.impl.BitArrayValidator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -55,7 +55,7 @@ public class SDesCipherDecipherController {
     private File inputFile;
 
     private final FileCipherDecipher fileCipherDecipher = new FileCipherDecipherImpl(new SDesCipherDecipher());
-    private final Validator validator = new BitSetValidator(10);
+    private final Validator validator = new BitArrayValidator(10);
 
     @FXML
     void chooseFile(ActionEvent event) {

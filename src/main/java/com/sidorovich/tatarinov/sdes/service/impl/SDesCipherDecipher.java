@@ -1,5 +1,6 @@
 package com.sidorovich.tatarinov.sdes.service.impl;
 
+import com.sidorovich.tatarinov.sdes.model.BitArray;
 import com.sidorovich.tatarinov.sdes.service.Cipher;
 import com.sidorovich.tatarinov.sdes.service.Decipher;
 import com.sidorovich.tatarinov.sdes.util.BitSetUtil;
@@ -26,8 +27,8 @@ public class SDesCipherDecipher implements Cipher, Decipher {
     }
 
     @Override
-    public BitSet cipher(BitSet bitSet, BitSet key1, BitSet key2) {
-        BitSet output = bitSetUtil.replace(bitSet, RULE_IP);
+    public BitArray cipher(BitArray bitSet, BitArray key1, BitArray key2) {
+        BitArray output = bitSetUtil.replace(bitSet, RULE_IP);
 
         output = roundUtil.round(output, key1);
         output = bitSetUtil.changeParts(output, BIT_COUNT);
@@ -38,7 +39,7 @@ public class SDesCipherDecipher implements Cipher, Decipher {
     }
 
     @Override
-    public BitSet decipher(BitSet bitSet, BitSet key1, BitSet key2) {
+    public BitArray decipher(BitArray bitSet, BitArray key1, BitArray key2) {
         return cipher(bitSet, key2, key1);
     }
 

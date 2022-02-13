@@ -4,7 +4,7 @@ import com.sidorovich.tatarinov.sdes.util.Validator;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class BitSetValidator implements Validator {
+public class BitArrayValidator implements Validator {
 
     private static final String BIT_SET_REGEX = "^[01]{%d}$";
 

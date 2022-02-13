@@ -1,13 +1,12 @@
 package com.sidorovich.tatarinov.sdes.util;
 
 import com.sidorovich.tatarinov.sdes.exception.InvalidInputKeyException;
-
-import java.util.BitSet;
+import com.sidorovich.tatarinov.sdes.model.BitArray;
 
 public interface KeyGenerator {
 
-    BitSet generateKey1(BitSet inputKey) throws InvalidInputKeyException;
+    BitArray generateKey1(BitArray inputKey) throws InvalidInputKeyException;
 
-    BitSet generateKey2(BitSet inputKey) throws InvalidInputKeyException;
+    BitArray generateKey2(BitArray inputKey) throws InvalidInputKeyException;
 
 }

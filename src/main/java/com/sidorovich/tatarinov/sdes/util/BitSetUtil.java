@@ -1,19 +1,16 @@
 package com.sidorovich.tatarinov.sdes.util;
 
+import com.sidorovich.tatarinov.sdes.model.BitArray;
 import com.sidorovich.tatarinov.sdes.model.Pair;
-
-import java.util.BitSet;
 
 public interface BitSetUtil {
 
-    BitSet replace(BitSet bitSet, int[] positions);
+    BitArray replace(BitArray bitSet, int[] positions);
 
-    BitSet shift(BitSet inputKey, int size, int position);
+    BitArray shift(BitArray inputKey, int position);
 
-    Pair<BitSet, BitSet> split(BitSet input, int totalSize);
+    Pair<BitArray, BitArray> split(BitArray input);
 
-    BitSet concat(Pair<BitSet, BitSet> bitSetPair, int totalSize);
-
-    BitSet changeParts(BitSet bitSet, int totalSize);
+    BitArray changeParts(BitArray bitSet, int totalSize);
 
 }

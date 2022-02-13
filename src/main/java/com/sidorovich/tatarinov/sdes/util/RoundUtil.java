@@ -1,9 +1,9 @@
 package com.sidorovich.tatarinov.sdes.util;
 
-import java.util.BitSet;
+import com.sidorovich.tatarinov.sdes.model.BitArray;
 
 public interface RoundUtil {
 
-    BitSet round(BitSet source, BitSet key);
+    BitArray round(BitArray source, BitArray key);
 
 }
